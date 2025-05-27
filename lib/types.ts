@@ -3,25 +3,47 @@ import type React from "react"
 export interface Product {
   id: string
   name: string
-  category: string
-  categoryId: string
+  description?: string
+  fullDescription?: string
   price: number
   originalPrice?: number
   stock: number
-  status: string
-  rating: number
-  reviewCount: number
+  category: string
   imageUrl?: string
-  description?: string
+  imageUrls?: string[]
+  status: "active" | "inactive"
+  featured?: boolean
+  sku?: string
+  barcode?: string
+  variants?: ProductVariant[]
+  metaTitle?: string
+  metaDescription?: string
+  metaKeywords?: string
+  relatedProducts?: string[]
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
+}
+
+export interface ProductVariant {
+  name: string
+  options: string[]
 }
 
 export interface Order {
   id: string
-  customer: string
+  customer: {
+    name: string
+    email: string
+    avatar?: string
+  }
   date: string
   total: number
-  status: string
-  items?: OrderItem[]
+  status: "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled"
+  paymentStatus: "Paid" | "Pending" | "Failed" | "Refunded"
+  items: OrderItem[]
+  shippingAddress?: Address
+  billingAddress?: Address
 }
 
 export interface OrderItem {
@@ -29,16 +51,30 @@ export interface OrderItem {
   productName: string
   quantity: number
   price: number
+  variant?: {
+    [key: string]: string
+  }
+}
+
+export interface Address {
+  street: string
+  city: string
+  state: string
+  postalCode: string
+  country: string
 }
 
 export interface Customer {
   id: string
   name: string
   email: string
-  orders: number
+  phone?: string
+  avatar?: string
+  dateJoined: string
+  totalOrders: number
   totalSpent: number
-  lastOrder: string
-  avatarColor: string
+  lastPurchase?: string
+  addresses?: Address[]
 }
 
 export interface Testimonial {
@@ -51,9 +87,14 @@ export interface Testimonial {
 }
 
 // Chart data types
-export interface ChartDataItem {
+export interface ChartData {
   name: string
   value: number
+}
+
+export interface LineChartData {
+  name: string
+  [key: string]: string | number
 }
 
 // Navigation types

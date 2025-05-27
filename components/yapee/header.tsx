@@ -36,7 +36,7 @@ export function YapeeHeader() {
       setIsLoggedIn(false)
     } else {
       setIsLoggedIn(true)
-      setUsername("John Doe")
+      setUsername(username || "User")
     }
   }
 

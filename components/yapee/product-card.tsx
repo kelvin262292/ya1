@@ -39,7 +39,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="relative h-48 w-full overflow-hidden">
         <div className="absolute inset-0 transition-transform duration-500 transform-gpu">
           <Image
-            src={product.imageUrl || "/placeholder.svg?height=400&width=400"}
+            src={product.imageUrl || `/products/${product.id}.jpg`}
             alt={product.name}
             className={cn(
               "object-cover w-full h-full transition-transform duration-500",
@@ -67,7 +67,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Rating */}
         <div className="flex items-center">
           <div className="flex text-yellow-500">
-            {[...Array(5)].map((_, i) => (
+            {Array.from({length:5}, (_, i) => (
               <span key={i}>
                 {i < Math.floor(product.rating) ? (
                   <span className="text-yellow-500">★</span>

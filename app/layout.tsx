@@ -2,14 +2,13 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Providers } from "./providers"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Yapee E-commerce",
-  description: "Modern e-commerce platform for smart home devices",
-    generator: 'v0.dev'
+  title: "Yapee E-Commerce Admin",
+  description: "Hệ thống quản trị cho nền tảng thương mại điện tử Yapee",
 }
 
 export default function RootLayout({
@@ -18,11 +17,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

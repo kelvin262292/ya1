@@ -7,7 +7,21 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+      },
+      // Thêm picsum.photos để hỗ trợ placeholder images
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      }
+    ],
   },
 }
 

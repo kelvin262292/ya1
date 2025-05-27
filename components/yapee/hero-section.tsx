@@ -8,11 +8,12 @@ export function HeroSection() {
         <div
           className="w-full h-full bg-cover bg-center"
           style={{
-            backgroundImage: "url('/placeholder.svg?height=1080&width=1920')",
+            backgroundImage: "url('/placeholder.jpg')",
+            backgroundPosition: "center bottom"
           }}
         />
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-red-500/80 to-orange-500/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-red-600/70 to-orange-500/50" />
       </div>
 
       {/* Content */}

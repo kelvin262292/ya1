@@ -1,6 +1,18 @@
 # Yapee E-commerce
 
 ## Giới thiệu
+
+## Hướng dẫn Sử dụng
+1. **Đăng ký/Đăng nhập**: Truy cập trang /login, nhập email và mật khẩu để đăng nhập (hoặc đăng ký nếu chưa có tài khoản).
+2. **Thêm sản phẩm vào giỏ**: Truy cập trang sản phẩm, nhấn "Thêm vào giỏ hàng".
+3. **Đặt hàng**: Truy cập giỏ hàng (/cart), nhấn "Tiến hành đặt hàng" và điền thông tin giao hàng.
+
+## Quy ước Coding
+- **Component**: Sử dụng PascalCase (ví dụ: `ProductCard.tsx`).
+- **Biến/Function**: Sử dụng camelCase (ví dụ: `handleClick`).
+- **Comment**: Sử dụng JSDoc cho các hàm quan trọng (ví dụ: `/** Lấy danh sách sản phẩm */`).
+
+## Cấu trúc Dự Án
 Yapee E-commerce là một ứng dụng thương mại điện tử được xây dựng bằng Next.js, React, TypeScript, Tailwind CSS, và các thư viện hỗ trợ khác. Dự án này cung cấp giao diện người dùng thân thiện, dễ sử dụng và hiệu quả cho cả khách hàng và quản trị viên.
 
 ## Cấu trúc Dự Án

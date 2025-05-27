@@ -20,18 +20,18 @@ export function YapeeFooter() {
               hơn.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
-                <Youtube className="h-5 w-5" />
-              </a>
+              <a href="https://facebook.com/yapee-shop" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
+  <Facebook className="h-5 w-5" />
+</a>
+              <a href="https://instagram.com/yapee-official" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
+  <Instagram className="h-5 w-5" />
+</a>
+              <a href="https://twitter.com/yapee_shop" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
+  <Twitter className="h-5 w-5" />
+</a>
+              <a href="https://youtube.com/c/yapee-tutorials" className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400">
+  <Youtube className="h-5 w-5" />
+</a>
             </div>
           </div>
 
@@ -126,6 +126,14 @@ export function YapeeFooter() {
                   Chính sách bảo mật
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/yapee/terms"
+                  className="text-gray-600 hover:text-red-500 dark:text-gray-300 dark:hover:text-red-400"
+                >
+                  Điều khoản sử dụng
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -134,7 +142,7 @@ export function YapeeFooter() {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Đăng Ký Nhận Tin</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4">Nhận thông tin về sản phẩm mới và ưu đãi đặc biệt.</p>
             <div className="flex space-x-2">
-              <Input type="email" placeholder="Email của bạn" className="bg-white dark:bg-gray-700" />
+              <Input type="email" placeholder="Email của bạn" className="bg-white dark:bg-gray-700" required />
               <Button className="bg-red-500 hover:bg-red-600 text-white">Đăng Ký</Button>
             </div>
           </div>
