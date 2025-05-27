@@ -1,0 +1,3 @@
+const MemoizedRow = React.memo(RowComponent);
+import { FixedSizeList as List } from 'react-window';
+// ... existing code ...

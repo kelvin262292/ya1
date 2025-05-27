@@ -1,0 +1,11 @@
+Phase 1 (Core):
+- [X] Triển khai ProductsPage (2 ngày)
+- [X] Xây dựng OrderManagement (3 ngày)
+
+Phase 2 (UI Enhancement):
+- [ ] Tối ưu DataTable performance (Ước tính: 2 ngày)
+- [ ] Thêm animation cho sidebar (Ước tính: 1 ngày)
+
+Phase 3 (Advanced):
+- [ ] Triển khai phân quyền RBAC (Ước tính: 3 ngày)
+- [X] Tích hợp Export CSV/Excel

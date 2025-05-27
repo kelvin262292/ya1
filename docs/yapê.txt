@@ -1,0 +1,316 @@
+# Yapee E-commerce - Giao diện Website Thương Mại Điện Tử (Phiên bản Hiện Tại)
+
+Đây là dự án mô phỏng giao diện người dùng (frontend) cho một website thương mại điện tử có tên "Yapee", chuyên về các thiết bị gia đình thông minh. Dự án được xây dựng bằng React, TypeScript và Tailwind CSS. Phiên bản hiện tại là một **ứng dụng trang đơn (Single Page Application - SPA)**, tập trung vào trải nghiệm người dùng mượt mà với các hiệu ứng và điều hướng cuộn trang.
+
+##  Mục lục
+1. [Giới thiệu chung](#1-giới-thiệu-chung)
+2. [Tính năng chính](#2-tính-năng-chính)
+3. [Công nghệ sử dụng](#3-công-nghệ-sử-dụng)
+4. [Styling và Theme](#4-styling-và-theme)
+    *   [Mã màu](#41-mã-màu)
+    *   [Font chữ](#42-font-chữ)
+    *   [Icons](#43-icons)
+5. [Bố cục Layout và Hiệu ứng](#5-bố-cục-layout-và-hiệu-ứng)
+    *   [Tổng thể](#51-tổng-thể)
+    *   [Header (Thanh điều hướng)](#52-header-thanh-điều-hướng)
+    *   [Hero Section](#53-hero-section)
+    *   [CategoryNav (Thanh điều hướng danh mục)](#54-categorynav-thanh-điều-hướng-danh-mục)
+    *   [Products Section (Khu vực sản phẩm)](#55-products-section-khu-vực-sản-phẩm)
+    *   [ProductCard (Thẻ sản phẩm)](#56-productcard-thẻ-sản-phẩm)
+    *   [Promotions Section (Khu vực khuyến mãi)](#57-promotions-section-khu-vực-khuyến-mãi)
+    *   [Testimonial Carousel (Băng chuyền đánh giá)](#58-testimonial-carousel-băng-chuyền-đánh-giá)
+    *   [Footer (Chân trang)](#59-footer-chân-trang)
+    *   [Toast Notifications (Thông báo nhanh)](#510-toast-notifications-thông-báo-nhanh)
+    *   [Hiệu ứng chung](#511-hiệu-ứng-chung)
+6. [Cấu trúc thư mục](#6-cấu-trúc-thư-mục)
+7. [Hướng dẫn cài đặt và chạy dự án](#7-hướng-dẫn-cài-đặt-và-chạy-dự-án)
+8. [Các thành phần (Components) nổi bật](#8-các-thành-phần-components-nổi-bật)
+9. [Điều hướng (Navigation)](#9-điều-hướng-navigation)
+10. [Quản lý trạng thái và Context](#10-quản-lý-trạng-thái-và-context)
+11. [Dữ liệu](#11-dữ-liệu)
+12. [Hướng phát triển tiếp theo (Gợi ý)](#12-hướng-phát-triển-tiếp-theo-gợi-ý)
+
+## 1. Giới thiệu chung
+
+Dự án này nhằm mục đích xây dựng một giao diện website thương mại điện tử hiện đại, trực quan và responsive. Ứng dụng được viết hoàn toàn bằng React (sử dụng Function Components và Hooks), TypeScript để đảm bảo type safety, và Tailwind CSS để styling nhanh chóng và hiệu quả. Đây là một ứng dụng trang đơn (SPA) nơi các phần nội dung được tải và hiển thị động, với điều hướng chính dựa trên việc cuộn đến các section tương ứng.
+
+## 2. Tính năng chính
+
+*   **Trang chủ động (Dynamic Homepage):**
+    *   **Hero section** ấn tượng với hình ảnh nền, gradient và lời kêu gọi hành động (CTA).
+    *   Hiển thị **"Sản Phẩm Nổi Bật"** với khả năng **lọc theo danh mục** (`CategoryNav`).
+    *   Khu vực **"Ưu Đãi Đặc Biệt"** làm nổi bật các chương trình khuyến mãi.
+    *   Phần **"Đánh Giá Từ Khách Hàng"** dạng băng chuyền (carousel) tự động trượt và có điều khiển.
+*   **Tương tác người dùng:**
+    *   **Chế độ Sáng/Tối (Dark Mode)** có thể chuyển đổi và lưu lựa chọn vào `localStorage`.
+    *   **Thêm sản phẩm vào giỏ hàng** (quản lý trạng thái qua React Context).
+    *   Hiển thị **số lượng sản phẩm trong giỏ hàng** trên Header.
+    *   **Thông báo nhanh (Toast notifications)** cho các hành động như thêm vào giỏ hàng, đăng nhập/đăng xuất.
+    *   **Mô phỏng trạng thái Đăng nhập/Đăng xuất** với tên người dùng hiển thị trên Header.
+*   **Giao diện:**
+    *   **Thanh điều hướng (Header)** cố định khi cuộn, với hiệu ứng `backdrop-blur`.
+    *   **Thanh điều hướng danh mục sản phẩm (CategoryNav)** cố định bên dưới Header khi cuộn.
+    *   **Thiết kế Responsive:** Giao diện tự động điều chỉnh cho các kích thước màn hình (desktop, tablet, mobile), bao gồm menu mobile dạng xổ xuống.
+*   **Sử dụng dữ liệu giả (mock data):**
+    *   Sản phẩm, đánh giá, danh mục được lấy từ dữ liệu giả định nghĩa sẵn trong `constants.ts`.
+
+## 3. Công nghệ sử dụng
+
+*   **React:** Phiên bản `^19.1.0`. Thư viện JavaScript để xây dựng giao diện người dùng. Sử dụng Hooks (useState, useEffect, useCallback, useContext, createContext) và Function Components.
+*   **React DOM:** Phiên bản `^19.1.0` để tương tác với DOM.
+*   **TypeScript:** Ngôn ngữ lập trình dựa trên JavaScript, bổ sung kiểu tĩnh.
+*   **Tailwind CSS:** Framework CSS utility-first. Được nhúng qua CDN (`https://cdn.tailwindcss.com`) và cấu hình theme tùy chỉnh (màu sắc, font) trực tiếp trong file `index.html`.
+*   **Font Awesome:** Thư viện icon. Được nhúng qua CDN (`https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css`) cho các icon như giỏ hàng, menu, sao đánh giá, mũi tên điều hướng, mạng xã hội.
+*   **ES Modules (ESM) & Import Maps:** Sử dụng import maps trong `index.html` để tải các module React, React DOM trực tiếp trong trình duyệt từ `https://esm.sh/` mà không cần bước build.
+
+## 4. Styling và Theme
+
+Toàn bộ giao diện được xây dựng bằng các utility classes của Tailwind CSS. Cấu hình theme tùy chỉnh được định nghĩa trong đối tượng `tailwind.config` bên trong thẻ `<script>` của file `index.html`.
+
+### 4.1. Mã màu
+
+*   **Màu chủ đạo (Primary):** `primary: '#EF4444'` (Tương đương `red-500` của Tailwind). Được sử dụng cho các nút CTA chính, giá sản phẩm, các điểm nhấn thương hiệu.
+*   **Màu phụ (Secondary):** `secondary: '#F97316'` (Tương đương `orange-500` của Tailwind). Sử dụng cho các ưu đãi, một số điểm nhấn phụ.
+*   **Màu nền (Backgrounds):**
+    *   Sáng: `bg-gray-50` (chính), `bg-white` (cards, header), `bg-gray-100` (một số section).
+    *   Tối: `dark:bg-gray-900` (chính), `dark:bg-gray-800` (cards, header), `dark:bg-gray-800/50` (một số section).
+*   **Màu chữ (Text):**
+    *   Sáng: `text-gray-900` (chính), `text-gray-600` (phụ), `text-gray-500` (ít quan trọng).
+    *   Tối: `dark:text-white` (chính), `dark:text-gray-300` (phụ), `dark:text-gray-400` (ít quan trọng).
+*   **Màu khác:**
+    *   Vàng (Yellow) cho sao đánh giá: `text-yellow-500`.
+    *   Xanh lá (Green) cho toast thành công: `bg-green-500`.
+
+### 4.2. Font chữ
+
+*   **Font chính:** `Inter`.
+*   **Nguồn:** Tải từ Google Fonts (`https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap`).
+*   **Weights sử dụng:** 400 (Regular), 500 (Medium), 600 (Semi-bold), 700 (Bold), 800 (Extra-bold).
+*   Được định nghĩa làm font `sans-serif` mặc định (`fontFamily: { inter: ['Inter', 'sans-serif'] }`) trong `tailwind.config`.
+
+### 4.3. Icons
+
+*   **Custom SVG Icons:**
+    *   `YapeeLogoIcon` (`components/icons/YapeeLogoIcon.tsx`): Logo chính của Yapee.
+    *   `MoonIcon`, `SunIcon` (`components/icons/ThemeIcons.tsx`): Icons cho nút chuyển đổi chế độ Sáng/Tối.
+    *   Các SVG này được nhúng trực tiếp vào JSX của component, cho phép tùy chỉnh màu sắc bằng `currentColor`.
+*   **Font Awesome Icons:**
+    *   **Nguồn:** CDN `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css`.
+    *   **Sử dụng:**
+        *   `fas fa-shopping-cart`: Icon giỏ hàng trên Header.
+        *   `fas fa-bars`: Icon menu mobile trên Header.
+        *   `fas fa-star`, `fas fa-star-half-alt`, `far fa-star`: Icons sao đánh giá trên `ProductCard`.
+        *   `fas fa-cart-plus`: Icon trên nút "Thêm vào giỏ" của `ProductCard`.
+        *   `fas fa-chevron-left`, `fas fa-chevron-right`: Icons điều hướng cho `TestimonialCarousel`.
+        *   `fab fa-facebook-f`, `fab fa-instagram`, `fab fa-twitter`, `fab fa-youtube`: Icons mạng xã hội ở `Footer`.
+        *   Kích thước và màu sắc được điều chỉnh bằng utility classes của Tailwind CSS.
+
+## 5. Bố cục Layout và Hiệu ứng
+
+### 5.1. Tổng thể
+*   Ứng dụng là một trang đơn, các section được xếp chồng lên nhau theo chiều dọc.
+*   Layout chính sử dụng `flex flex-col min-h-screen` để đảm bảo Footer luôn ở cuối trang.
+*   Nội dung chính của các section thường được căn giữa và giới hạn chiều rộng bằng class `container mx-auto px-4`.
+
+### 5.2. Header (Thanh điều hướng)
+*   **Component:** `components/Header.tsx`
+*   **Vị trí:** Cố định ở đầu trang (`sticky top-0 z-40`). Chiều cao khoảng `68px` (tham chiếu từ `HEADER_HEIGHT_PX` trong `constants.ts`).
+*   **Background:** `bg-white/80 dark:bg-gray-800/80` kết hợp với `backdrop-blur-md` tạo hiệu ứng mờ nền khi cuộn qua nội dung bên dưới.
+*   **Nội dung:** Logo Yapee, tên thương hiệu, các liên kết điều hướng (cuộn đến section), nút chuyển đổi Sáng/Tối, thông tin người dùng (mock), icon giỏ hàng với số lượng sản phẩm, và nút menu mobile.
+*   **Menu Mobile:** Xổ xuống khi nhấn nút `fa-bars` trên màn hình nhỏ (`md:hidden`), hiển thị các liên kết điều hướng và tùy chọn đăng nhập/đăng xuất.
+*   **Hiệu ứng:**
+    *   Chuyển màu nền và chữ mượt mà khi đổi chế độ Sáng/Tối.
+    *   Hover effect trên các liên kết và nút.
+
+### 5.3. Hero Section
+*   **Component:** `components/HeroSection.tsx`
+*   **Vị trí:** Ngay dưới Header, chiếm phần lớn chiều cao màn hình ban đầu (`h-[70vh] min-h-[450px]`, `md:h-[calc(100vh-68px)] md:min-h-[600px]`).
+*   **Background:**
+    *   Một hình ảnh nền lớn (`object-cover` để lấp đầy).
+    *   Một lớp phủ gradient (`bg-gradient-to-r from-red-500/80 to-orange-500/60`) phía trên ảnh nền.
+*   **Nội dung:** Tiêu đề lớn, mô tả ngắn, và nút Call-to-Action (CTA) "Mua Ngay".
+*   **Hiệu ứng:**
+    *   Chữ có `drop-shadow-lg` để nổi bật trên nền.
+    *   Nút CTA "Mua Ngay": `transform transition hover:scale-105 duration-300 ease-out` khi hover.
+    *   Ở cuối section, có một dải gradient mờ dần vào màu nền chính của trang (`bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent`) để tạo sự chuyển tiếp mượt mà.
+
+### 5.4. CategoryNav (Thanh điều hướng danh mục)
+*   **Component:** `components/CategoryNav.tsx`
+*   **Vị trí:** Ngay dưới `HeroSection`, và cố định bên dưới Header khi cuộn (`sticky z-30` với `top` được tính bằng `HEADER_HEIGHT_PX`).
+*   **Background:** `bg-gray-100 dark:bg-gray-800/50`.
+*   **Nội dung:** Các nút bấm tương ứng với danh mục sản phẩm. Cho phép người dùng lọc sản phẩm.
+*   **Hiệu ứng:**
+    *   Nút danh mục được chọn có màu nền và chữ khác biệt (`bg-red-500 text-white shadow-md`).
+    *   Hover effect trên các nút danh mục.
+    *   Thanh cuộn ngang (`overflow-x-auto`) trên màn hình nhỏ nếu có nhiều danh mục.
+
+### 5.5. Products Section (Khu vực sản phẩm)
+*   **Component:** `App.tsx` (section wrapper), `components/ProductGrid.tsx` (grid layout).
+*   **Vị trí:** Dưới `CategoryNav`.
+*   **Layout:** Tiêu đề section "Sản Phẩm Nổi Bật", tiếp theo là `ProductGrid`.
+*   **`ProductGrid`:** Sử dụng grid system của Tailwind (`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8`) để hiển thị các `ProductCard` một cách responsive.
+*   **Hiệu ứng:** Nếu không có sản phẩm nào khớp với bộ lọc, hiển thị thông báo.
+
+### 5.6. ProductCard (Thẻ sản phẩm)
+*   **Component:** `components/ProductCard.tsx`
+*   **Layout:** Hiển thị hình ảnh sản phẩm, tên, danh mục, giá (giá gốc và giá khuyến mãi nếu có), đánh giá sao.
+*   **Nội dung:**
+    *   Hình ảnh sản phẩm chiếm phần trên.
+    *   Badge "GIẢM GIÁ" nếu có `originalPrice`.
+    *   Thông tin text và nút "Thêm vào giỏ".
+*   **Hiệu ứng:**
+    *   Toàn bộ card: `transition-all duration-300 hover:shadow-2xl transform hover:-translate-y-1`.
+    *   Hình ảnh sản phẩm: `transition-transform duration-500 hover:scale-110` khi hover.
+    *   Nút "Thêm vào giỏ": Hover effect (`hover:bg-red-600`).
+
+### 5.7. Promotions Section (Khu vực khuyến mãi)
+*   **Component:** `components/PromotionsSection.tsx`
+*   **Layout:** Tiêu đề "Ưu Đãi Đặc Biệt", sau đó là grid 2 cột (`md:grid-cols-2`) chứa các card khuyến mãi.
+*   **Card khuyến mãi:**
+    *   Sử dụng gradient background (`bg-gradient-to-br from-red-500 to-red-600` và `from-orange-500 to-orange-600`).
+    *   Nội dung text và nút CTA riêng.
+*   **Hiệu ứng:**
+    *   Card khuyến mãi: `transform hover:scale-105 transition-transform duration-300`.
+    *   Nút CTA: Hover effect.
+
+### 5.8. Testimonial Carousel (Băng chuyền đánh giá)
+*   **Component:** `components/TestimonialCarousel.tsx`, sử dụng `components/TestimonialCard.tsx`.
+*   **Layout:** Tiêu đề "Đánh Giá Từ Khách Hàng", tiếp theo là carousel.
+*   **Cơ chế Carousel:**
+    *   Sử dụng `transform: translateX(-${currentIndex * 100}%)` để tạo hiệu ứng trượt.
+    *   Tự động trượt sau mỗi 5 giây (`setInterval`).
+    *   Nút điều hướng "Trước" (`fa-chevron-left`) và "Sau" (`fa-chevron-right`).
+    *   Các chấm tròn chỉ báo (dots) cho phép nhảy đến testimonial cụ thể.
+*   **`TestimonialCard`:** Hiển thị avatar, trích dẫn, tên tác giả và vai trò/địa điểm. Avatar có border màu đỏ.
+*   **Hiệu ứng:**
+    *   Slide transition `duration-500 ease-in-out`.
+    *   Nút điều hướng và chấm chỉ báo có hover effect.
+    *   Chấm chỉ báo của testimonial hiện tại được `scale-125` và có màu khác.
+
+### 5.9. Footer (Chân trang)
+*   **Component:** `components/Footer.tsx`
+*   **Layout:** Chia thành nhiều cột (thông tin Yapee, liên kết nhanh, thông tin, form đăng ký nhận tin) sử dụng grid (`md:grid-cols-2 lg:grid-cols-4`).
+*   **Nội dung:** Logo/tên, mô tả ngắn, icon mạng xã hội, các danh sách link, form email.
+*   **Hiệu ứng:** Hover effect trên các link và icon mạng xã hội.
+
+### 5.10. Toast Notifications (Thông báo nhanh)
+*   **Component:** `components/Toast.tsx`
+*   **Vị trí:** Cố định ở góc dưới bên phải màn hình (`fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100]`).
+*   **Hiển thị:** Xuất hiện khi có thông báo (ví dụ: thêm vào giỏ hàng), tự động biến mất sau 3 giây.
+*   **Styling:** Màu nền thay đổi tùy theo loại thông báo (`success`: xanh lá, `error`: đỏ).
+*   **Hiệu ứng:** `transition-all duration-500 transform`. Khi hiển thị: `opacity-100 translate-y-0`. Khi ẩn: `opacity-0 translate-y-full`.
+
+### 5.11. Hiệu ứng chung
+*   **Dark Mode Toggle:** Toàn bộ trang web chuyển đổi màu sắc mượt mà (`transition-colors duration-300` trên `body`).
+*   **Scroll Behavior:** Khi nhấp vào các link điều hướng trong Header, trang sẽ cuộn mượt mà đến section tương ứng (`scrollIntoView({ behavior: 'smooth' })`).
+*   **Responsive Transitions:** Các thay đổi layout do responsive (ví dụ: grid columns) diễn ra tức thì theo CSS, nhưng các hiệu ứng hover, focus được thiết kế để mượt mà.
+
+## 6. Cấu trúc thư mục
+
+```
+.
+├── README.md               # File này
+├── index.html              # File HTML chính, điểm vào của ứng dụng
+├── index.tsx               # File React gốc, render component App
+├── App.tsx                 # Component chính, quản lý layout chung và context
+├── metadata.json           # Thông tin meta về ứng dụng
+├── types.ts                # Định nghĩa các kiểu dữ liệu TypeScript (interfaces)
+├── constants.ts            # Chứa dữ liệu mock và các hằng số (VD: navLinksData, HEADER_HEIGHT_PX)
+│
+├── components/             # Chứa các UI components tái sử dụng
+│   ├── Header.tsx          # Thanh điều hướng chính
+│   ├── HeroSection.tsx     # Hero section của trang chủ
+│   ├── CategoryNav.tsx     # Thanh điều hướng danh mục sản phẩm
+│   ├── ProductGrid.tsx     # Lưới hiển thị sản phẩm
+│   ├── ProductCard.tsx     # Card hiển thị thông tin một sản phẩm
+│   ├── PromotionsSection.tsx # Khu vực hiển thị ưu đãi
+│   ├── TestimonialCarousel.tsx # Băng chuyền đánh giá khách hàng
+│   ├── TestimonialCard.tsx # Card hiển thị một đánh giá
+│   ├── Footer.tsx          # Chân trang
+│   ├── Toast.tsx           # Component thông báo nhanh
+│   │
+│   └── icons/              # Chứa các component icon SVG tùy chỉnh
+│       ├── YapeeLogoIcon.tsx
+│       └── ThemeIcons.tsx
+```
+*Lưu ý: Không có thư mục `pages/` trong cấu trúc hiện tại vì đây là một ứng dụng trang đơn.*
+
+## 7. Hướng dẫn cài đặt và chạy dự án
+
+Dự án này được thiết kế để chạy trực tiếp từ file `index.html` trong các trình duyệt web hiện đại hỗ trợ ES Modules và Import Maps. **Không cần bước build hay cài đặt dependencies phức tạp qua npm/yarn.**
+
+1.  **Clone repository (Nếu có):**
+    ```bash
+    git clone <your-repository-url>
+    cd <repository-folder>
+    ```
+2.  **Mở file `index.html`:**
+    *   Chỉ cần mở file `index.html` trực tiếp bằng trình duyệt web của bạn (ví dụ: Google Chrome, Firefox, Edge phiên bản mới).
+
+**Lưu ý:**
+*   Ứng dụng sử dụng CDN để tải React, React DOM, Tailwind CSS và Font Awesome. Do đó, bạn cần có kết nối internet khi mở ứng dụng lần đầu để các thư viện này được tải về.
+*   Biến môi trường `API_KEY` (nếu có trong `constants.ts`) được giả định là đã được cấu hình sẵn trong môi trường thực thi. Trong thiết lập hiện tại, không có tương tác API thực sự nào sử dụng API key.
+
+## 8. Các thành phần (Components) nổi bật
+
+*   **`App.tsx`**: Component gốc, quản lý trạng thái toàn cục thông qua `AppContext` (dark mode, giỏ hàng, toast, danh mục đã chọn, trạng thái đăng nhập), và cấu trúc layout chính của ứng dụng.
+*   **`Header.tsx`**: Thanh điều hướng chính, responsive với menu mobile, hiển thị thông tin giỏ hàng và trạng thái người dùng.
+*   **`HeroSection.tsx`**: Tạo ấn tượng ban đầu mạnh mẽ với hình ảnh, gradient và CTA.
+*   **`CategoryNav.tsx`**: Cho phép lọc sản phẩm một cách trực quan, dính theo scroll.
+*   **`ProductGrid.tsx` & `ProductCard.tsx`**: Hiển thị danh sách sản phẩm một cách hấp dẫn và tương tác (thêm vào giỏ, hiệu ứng hover).
+*   **`TestimonialCarousel.tsx`**: Tăng tính tin cậy bằng cách hiển thị đánh giá khách hàng một cách động.
+*   **`Toast.tsx`**: Cung cấp phản hồi tức thì cho người dùng.
+*   **`AppContext` (trong `App.tsx`)**: Trung tâm quản lý trạng thái chia sẻ cho toàn ứng dụng.
+
+## 9. Điều hướng (Navigation)
+
+Hiện tại, ứng dụng là một **trang đơn (Single Page Application)**. Việc điều hướng chủ yếu được thực hiện bằng cách **cuộn đến các section cụ thể** trên trang.
+
+*   Các liên kết trong `Header.tsx` (ví dụ: "Sản phẩm", "Khuyến mãi", "Đánh giá") khi được nhấp sẽ gọi hàm `handleNavLinkClick`.
+*   Hàm này sử dụng `document.getElementById(href.substring(1))` và `element.scrollIntoView({ behavior: 'smooth' })` để cuộn mượt đến section có `id` tương ứng.
+*   Các liên kết `isPageLink: true` trong `navLinksData` (ví dụ: "Giới thiệu", "Liên hệ") hiện tại chỉ `console.log` việc điều hướng, cho thấy tiềm năng mở rộng thành các trang riêng biệt trong tương lai.
+*   **Không sử dụng thư viện định tuyến như React Router DOM trong phiên bản này.**
+
+## 10. Quản lý trạng thái và Context
+
+Trạng thái toàn cục của ứng dụng được quản lý thông qua **React Context API**.
+*   **`AppContext`** được định nghĩa và cung cấp trong `App.tsx`.
+*   Các trạng thái được quản lý bao gồm:
+    *   `darkMode`: Chế độ sáng/tối.
+    *   `cart`: Mảng các sản phẩm trong giỏ hàng (`CartItem[]`).
+    *   `toastConfig`: Cấu hình cho thông báo toast (message, visibility, type).
+    *   `selectedCategory`: Danh mục sản phẩm đang được chọn để lọc.
+    *   `isLoggedIn`, `username`: Trạng thái đăng nhập và tên người dùng (mock).
+*   Các hàm để cập nhật trạng thái này (ví dụ: `toggleDarkMode`, `addToCart`, `showToast`, `setSelectedCategory`, `login`, `logout`) cũng được cung cấp qua context, cho phép các component con truy cập và thay đổi trạng thái một cách dễ dàng.
+
+## 11. Dữ liệu
+
+Ứng dụng sử dụng dữ liệu giả (mock data) được lưu trữ trong file `constants.ts`. Dữ liệu này bao gồm:
+*   `productsData`: Mảng các đối tượng sản phẩm (`Product[]`).
+*   `testimonialsData`: Mảng các đối tượng đánh giá (`Testimonial[]`).
+*   `navLinksData`: Mảng các đối tượng liên kết điều hướng (`NavLink[]`).
+*   `categories`: Mảng các đối tượng danh mục sản phẩm.
+*   `HEADER_HEIGHT_PX`: Hằng số chiều cao ước tính của Header.
+
+Các kiểu dữ liệu (interfaces) cho các đối tượng này (`Product`, `Testimonial`, `CartItem`, `ProductCategory`, `NavLink`) được định nghĩa trong `types.ts`.
+
+## 12. Hướng phát triển tiếp theo (Gợi ý)
+
+*   **Tích hợp API thật:** Kết nối với backend để lấy dữ liệu sản phẩm, quản lý người dùng, xử lý đơn hàng.
+*   **Hoàn thiện chức năng:**
+    *   Xây dựng trang chi tiết sản phẩm.
+    *   Triển khai đầy đủ logic cho giỏ hàng (thay đổi số lượng, xóa sản phẩm, tổng tiền).
+    *   Quy trình thanh toán.
+    *   Trang quản lý tài khoản người dùng.
+    *   Hiện thực hóa các trang "Giới thiệu", "Liên hệ" (có thể sử dụng React Router).
+*   **Chức năng tìm kiếm:** Thêm ô tìm kiếm sản phẩm.
+*   **Tối ưu hóa hiệu suất:**
+    *   Sử dụng `React.lazy` và `Suspense` nếu chuyển sang kiến trúc đa trang với React Router.
+    *   Tối ưu hóa hình ảnh (định dạng, kích thước, lazy loading).
+*   **Testing:** Viết unit tests (ví dụ: với Jest, React Testing Library) và integration tests.
+*   **Accessibility (A11y):** Kiểm tra và cải thiện khả năng truy cập của website (thêm ARIA attributes, kiểm tra keyboard navigation).
+*   **Internationalization (i18n):** Hỗ trợ đa ngôn ngữ nếu cần.
+
+---
+
+Hy vọng README này cung cấp cái nhìn tổng quan và chi tiết tuyệt đối về dự án Yapee E-commerce phiên bản hiện tại!

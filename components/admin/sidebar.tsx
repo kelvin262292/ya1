@@ -9,6 +9,11 @@ import { BoxIcon } from "./icons/box-icon"
 import { ShoppingBagIcon } from "./icons/shopping-bag-icon"
 import { UsersIcon } from "./icons/users-icon"
 import { ChartBarIcon } from "./icons/chart-bar-icon"
+import { motion } from 'framer-motion';
+const sidebarVariants = {
+  open: { width: 240 },
+  collapsed: { width: 60 }
+};
 
 const NAV_ITEMS = [
   { name: "Dashboard", icon: HomeIcon, path: "/admin" },
